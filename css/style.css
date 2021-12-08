@@ -197,6 +197,7 @@ p {
   align-content: start;
   padding: 30px;
   gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
 
 .footer {
@@ -219,13 +220,58 @@ p {
   }
 }
 
+@keyframes seta {
+  from {
+    right: 30px;
+  }
+  to {
+    right: 20px;
+  }
+}
+
 @media (max-width: 760px) {
   .estrutura {
     grid-template-columns: 100%;
     grid-template-areas:
       "header"
       "sidenav"
+      "content"
       "anuncios"
       "footer";
+  }
+  .header {
+    grid-template-columns: auto;
+  }
+  .logo {
+    margin-bottom: 30px;
+  }
+  .sidenav {
+    padding: 0 30px 20px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    position: relative;
+  }
+  .sidenav::after {
+    content: "➝";
+    top: 5px;
+    right: 30px;
+    position: absolute;
+    animation: seta 0.5s ease-in 0s infinite alternate;
+  }
+  .sidenav ul {
+    display: flex;
+  }
+  .sidenav ul li {
+    flex: 1 0 60px;
+  }
+  .sidenav li a {
+    margin: 30px 30px 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .content {
+    grid-template-columns: 1fr;
   }
 }
